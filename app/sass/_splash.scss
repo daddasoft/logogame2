@@ -1,0 +1,25 @@
+.splash {
+  color: var(--textColor);
+  font-family: var(--font);
+  background-color: var(--bgColor);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  z-index: 50;
+
+  &__logo {
+    font-size: 150px;
+
+    span {
+      color: var(--SecondaryColor);
+    }
+  }
+
+  &__name {
+    font-size: 40px;
+  }
+}

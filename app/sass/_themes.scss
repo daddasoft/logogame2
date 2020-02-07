@@ -1,0 +1,40 @@
+.theme {
+  height: 100%;
+  display: none;
+  &__list {
+    padding: 10px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    &--item {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background: #000;
+      margin: 4px;
+      border: 3px solid var(--textColor);
+      cursor: pointer;
+      &.default {
+        background: red;
+      }
+      &.light {
+        background: red;
+      }
+      &.dark {
+        background: red;
+      }
+      &.sky {
+        background: red;
+      }
+      &.gradient {
+        background: red;
+      }
+    }
+  }
+  &__preview {
+    background: #000;
+    height: 100%;
+  }
+}

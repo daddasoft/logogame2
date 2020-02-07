@@ -1,0 +1,39 @@
+.welcome {
+  height: 100vh;
+  color: var(--textColor);
+  font-family: var(--font);
+  background-color: var(--bgColor);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  z-index: 44;
+  width: 100%;
+
+  &__logo {
+    font-size: 150px;
+
+    span {
+      color: var(--SecondaryColor);
+    }
+  }
+
+  &__name {
+    font-size: 40px;
+  }
+
+  &__buttonStart,
+  &__buttonExit {
+    width: 70%;
+    height: 40px;
+    margin-top: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--textColor);
+    font-family: var(--font);
+    background-image: var(--linear);
+  }
+}

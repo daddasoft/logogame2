@@ -1,0 +1,50 @@
+.menu {
+  height: 100vh;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.664);
+  width: 100%;
+  display: none;
+  color: var(--textColor);
+  font-family: var(--font);
+  z-index: 5;
+
+  &__content {
+    width: 80%;
+    height: 100%;
+    background: var(--headerColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__logo {
+      font-size: 14rem;
+
+      span {
+        color: var(--SecondaryColor);
+      }
+    }
+
+    &__name {
+      font-size: 3rem;
+    }
+
+    &__setting__list {
+      margin-top: 10px;
+      list-style: none;
+      width: 100%;
+      font-size: 1.5rem;
+
+      &--item {
+        text-align: center;
+        padding: 10px;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+          background: var(--hoverColor);
+        }
+      }
+    }
+  }
+}

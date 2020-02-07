@@ -1,0 +1,32 @@
+.winpopup {
+  color: var(--textColor);
+  font-family: var(--font);
+  background-color: #3f51b5e0;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  .logo__hint {
+    height: 150px;
+    width: 90%;
+    border-radius: 10px;
+  }
+  .nextButton {
+    padding: 10px 30px;
+    background: #101b8d;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    margin-top: 10px;
+    font-family: "Lexend Deca", sans-serif;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.2em #101a8db7;
+    }
+  }
+}
