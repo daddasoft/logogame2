@@ -1,43 +1,51 @@
 // Select Ui Element
-
-let Level = +localStorage.getItem("LogoLevel") || 0;
-const menuToggle = document.querySelector(".home__header--menu");
-const homeMain = document.querySelector(".home__main");
-const optionContainer = document.querySelector(".option__container");
-const resetSetting = document.querySelector(".resetSetting");
-const logoImage = document.querySelector(".logo__image");
-const menuList = document.querySelector(".menu-list");
-const LevelLabel = document.querySelector(".home__header--level");
-const menu = document.querySelector(".menu");
-const FontValue = document.querySelector(".valueFont");
-const SizeValue = document.querySelector(".valueSize");
-const FontSizeDrop = document.querySelector(".font__size--drop");
-const FontFamilyDrop = document.querySelector(".font__family--drop");
-const startButton = document.querySelector(".welcome__buttonStart");
-const NextButton = document.querySelector(".nextButton");
-const winPopUp = document.querySelector(".winpopup");
-const LogoHint = document.querySelector(".logo__hint");
-let IsShowingFont = false;
-let IsShowingSize = false;
-let isOpened = false;
-const homeChecked = document.getElementById("toggle__home");
-const menuContent = document.querySelector(".menu__content");
-const answerWrapper = document.querySelector(
+var Level = +localStorage.getItem("LogoLevel") || 0;
+var menuToggle = document.querySelector(".home__header--menu");
+var homeMain = document.querySelector(".home__main");
+var optionContainer = document.querySelector(".option__container");
+var resetSetting = document.querySelector(".resetSetting");
+var logoImage = document.querySelector(".logo__image");
+var menuList = document.querySelector(".menu-list");
+var LevelLabel = document.querySelector(".home__header--level");
+var menu = document.querySelector(".menu");
+var losepopup = document.querySelector(".losepopup");
+var ClearAnswer = document.querySelector(".losepopup__clear");
+var CloseAnswer = document.querySelector(".losepopup__close");
+var FontValue = document.querySelector(".valueFont");
+var SizeValue = document.querySelector(".valueSize");
+var DataNotFound = document.querySelector(".DataNotFound");
+var DataNotFoundReset = document.querySelector(".DataNotFound__reset");
+var FontSizeDrop = document.querySelector(".font__size--drop");
+var FontFamilyDrop = document.querySelector(".font__family--drop");
+var startButton = document.querySelector(".welcome__buttonStart");
+var NextButton = document.querySelector(".nextButton");
+var winPopUp = document.querySelector(".winpopup");
+var LogoHint = document.querySelector(".logo__hint");
+var IsShowingFont = false;
+var IsShowingSize = false;
+var isOpened = false;
+var soundEffect = new Audio();
+var homeChecked = document.getElementById("toggle__home");
+var menuContent = document.querySelector(".menu__content");
+var answerWrapper = document.querySelector(
   ".home__main--answerContainer--answerWrapper"
 );
-const keyboardWrapper = document.querySelector(
+var keyboardWrapper = document.querySelector(
   ".home__main--keyboardContainer--keyboardWrapper"
 );
-const setting = document.querySelector(".setting");
-const report = document.querySelector(".report");
-const themes = document.querySelector(".theme");
-const FontDrop = document.querySelector(".font__drop");
-const SizeDrop = document.querySelector(".size__drop");
+var setting = document.querySelector(".setting");
+var report = document.querySelector(".report");
+var themes = document.querySelector(".theme");
+var about = document.querySelector(".about");
+var FontDrop = document.querySelector(".font__drop");
+var SizeDrop = document.querySelector(".size__drop");
 //!
-const KeyboardMinus = document.querySelector(".keyboard__minus");
-const KeyboardPlus = document.querySelector(".keyboard__plus");
-const KeyboardValue = document.querySelector(".keyboard__value");
+var KeyboardMinus = document.querySelector(".keyboard__minus");
+var KeyboardPlus = document.querySelector(".keyboard__plus");
+var KeyboardValue = document.querySelector(".keyboard__value");
 //!
-const listSize = document.querySelector(".list__size");
-const listFont = document.querySelector(".list__font");
-const Welcome = document.querySelector(".welcome");
+var listSize = document.querySelector(".list__size");
+var listFont = document.querySelector(".list__font");
+var Welcome = document.querySelector(".welcome");
+var themeList = document.querySelector(".theme__list");
+var themePreview = document.querySelector(".theme__preview");
