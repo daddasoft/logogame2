@@ -3,7 +3,7 @@ const concat = require("gulp-concat");
 const buble = require("gulp-buble");
 const autoPrefixer = require("gulp-autoprefixer");
 const pug = require("gulp-pug");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require("sass"));
 const minify = require("gulp-minify");
 const cssMinify = require("gulp-minify-css");
 const sourcemaps = require("gulp-sourcemaps");
@@ -20,7 +20,7 @@ const originFiles = {
   htmlFiles: "app/html/*.pug",
   imgPathQuestion: "app/images/question/**",
   imgPathAnswer: "app/images/answer/**",
-  icons: "app/icons/**"
+  icons: "app/icons/**",
 };
 // Define The Finales Files
 const distFiles = {
@@ -29,7 +29,7 @@ const distFiles = {
   htmlDist: "dist/",
   imgPathQuestion: "dist/assets/logoQuestion/",
   imgPathAnswer: "dist/assets/logoAnswer/",
-  icons: "dist/assets/icons/"
+  icons: "dist/assets/icons/",
 };
 
 async function cssTask() {
@@ -48,7 +48,7 @@ async function pugTask() {
   return src(originFiles.htmlFiles)
     .pipe(
       pug({
-        pretty: true
+        pretty: true,
       })
     )
     .pipe(dest(distFiles.htmlDist))
@@ -68,7 +68,7 @@ async function imgPathQuestion() {
     .pipe(newer(distFiles.imgPathQuestion))
     .pipe(
       imagemin({
-        optimizationLevel: 10
+        optimizationLevel: 10,
       })
     )
     .pipe(dest(distFiles.imgPathQuestion))
@@ -79,7 +79,7 @@ async function imgPathAnswer() {
     .pipe(newer(distFiles.imgPathAnswer))
     .pipe(
       imagemin({
-        optimizationLevel: 10
+        optimizationLevel: 10,
       })
     )
     .pipe(dest(distFiles.imgPathAnswer))
@@ -90,7 +90,7 @@ async function icons() {
     .pipe(newer(distFiles.icons))
     .pipe(
       imagemin({
-        optimizationLevel: 10
+        optimizationLevel: 10,
       })
     )
     .pipe(dest(distFiles.icons))
@@ -98,9 +98,7 @@ async function icons() {
 }
 
 async function compressZip() {
-  return src("dist/**/*.*")
-    .pipe(zip("mySite.zip"))
-    .pipe(dest("."));
+  return src("dist/**/*.*").pipe(zip("mySite.zip")).pipe(dest("."));
 }
 
 async function watchTask() {
@@ -114,7 +112,7 @@ async function watchTask() {
       originFiles.imgPathAnswer,
       originFiles.imgPathQuestion,
       originFiles.icons,
-      "app/html/includes/"
+      "app/html/includes/",
     ],
     series(
       parallel(pugTask, cssTask, jsTask, imgPathQuestion, imgPathAnswer, icons)
