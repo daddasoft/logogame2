@@ -51,7 +51,6 @@ var logos = [
 ];
 
 // Select Ui Element
-
 var Level = +localStorage.getItem("LogoLevel") || 0;
 var menuToggle = document.querySelector(".home__header--menu");
 var homeMain = document.querySelector(".home__main");
@@ -61,8 +60,13 @@ var logoImage = document.querySelector(".logo__image");
 var menuList = document.querySelector(".menu-list");
 var LevelLabel = document.querySelector(".home__header--level");
 var menu = document.querySelector(".menu");
+var losepopup = document.querySelector(".losepopup");
+var ClearAnswer = document.querySelector(".losepopup__clear");
+var CloseAnswer = document.querySelector(".losepopup__close");
 var FontValue = document.querySelector(".valueFont");
 var SizeValue = document.querySelector(".valueSize");
+var DataNotFound = document.querySelector(".DataNotFound");
+var DataNotFoundReset = document.querySelector(".DataNotFound__reset");
 var FontSizeDrop = document.querySelector(".font__size--drop");
 var FontFamilyDrop = document.querySelector(".font__family--drop");
 var startButton = document.querySelector(".welcome__buttonStart");
@@ -72,6 +76,7 @@ var LogoHint = document.querySelector(".logo__hint");
 var IsShowingFont = false;
 var IsShowingSize = false;
 var isOpened = false;
+var soundEffect = new Audio();
 var homeChecked = document.getElementById("toggle__home");
 var menuContent = document.querySelector(".menu__content");
 var answerWrapper = document.querySelector(
@@ -83,6 +88,7 @@ var keyboardWrapper = document.querySelector(
 var setting = document.querySelector(".setting");
 var report = document.querySelector(".report");
 var themes = document.querySelector(".theme");
+var about = document.querySelector(".about");
 var FontDrop = document.querySelector(".font__drop");
 var SizeDrop = document.querySelector(".size__drop");
 //!
@@ -93,8 +99,10 @@ var KeyboardValue = document.querySelector(".keyboard__value");
 var listSize = document.querySelector(".list__size");
 var listFont = document.querySelector(".list__font");
 var Welcome = document.querySelector(".welcome");
+var themeList = document.querySelector(".theme__list");
+var themePreview = document.querySelector(".theme__preview");
 
-var UI = (function() {
+var UI = (function () {
   function loadEvent() {
     FontDrop.addEventListener("click", DropFontToggle);
     SizeDrop.addEventListener("click", DropSizeToggle);
@@ -109,7 +117,184 @@ var UI = (function() {
     answerWrapper.addEventListener("click", SymbolsPressed);
     NextButton.addEventListener("click", NextLevel);
     resetSetting.addEventListener("click", DefaultSetting);
+    homeChecked.addEventListener("change", homeScreen);
+    themeList.addEventListener("click", themeManager);
+    setting.addEventListener("click", hidedetails);
+    ClearAnswer.addEventListener("click", clearAnswer);
+    CloseAnswer.addEventListener("click", closeLose);
+    DataNotFoundReset.addEventListener("click", reserTheApp);
   }
+  function hidedetails() {
+    if (!IsShowingFont) {
+      HideElement(FontFamilyDrop);
+    }
+    if (!IsShowingSize) {
+      HideElement(FontSizeDrop);
+    }
+  }
+  function closeLose() {
+    HideElement(losepopup);
+  }
+  function reserTheApp() {
+    localStorage.removeItem("LogoLevel");
+    Level = 0;
+    LoadData();
+    setSettings();
+    HideElement(DataNotFound);
+  }
+  function themeManager(e) {
+    if (e.target.classList.contains("default")) {
+      MySetting = {};
+      if (localStorage.getItem("logoSetting")) {
+        MySetting = JSON.parse(localStorage.getItem("logoSetting"));
+      } else {
+        MySetting = {};
+      }
+      MySetting.theme = 1;
+      localStorage.setItem("logoSetting", JSON.stringify(MySetting));
+      SetDefaultTheme();
+      themePreview.style.backgroundImage =
+        "url(assets/icons/" + MySetting.theme + ".jpg)";
+    }
+    if (e.target.classList.contains("red")) {
+      MySetting = {};
+      if (localStorage.getItem("logoSetting")) {
+        MySetting = JSON.parse(localStorage.getItem("logoSetting"));
+      } else {
+        MySetting = {};
+      }
+      MySetting.theme = 5;
+      localStorage.setItem("logoSetting", JSON.stringify(MySetting));
+      SetRedTheme();
+      themePreview.style.backgroundImage =
+        "url(assets/icons/" + MySetting.theme + ".jpg)";
+    }
+    if (e.target.classList.contains("dark")) {
+      MySetting = {};
+      if (localStorage.getItem("logoSetting")) {
+        MySetting = JSON.parse(localStorage.getItem("logoSetting"));
+      } else {
+        MySetting = {};
+      }
+      MySetting.theme = 3;
+      localStorage.setItem("logoSetting", JSON.stringify(MySetting));
+      SetBlackTheme();
+      themePreview.style.backgroundImage =
+        "url(assets/icons/" + MySetting.theme + ".jpg)";
+    }
+    if (e.target.classList.contains("green")) {
+      MySetting = {};
+      if (localStorage.getItem("logoSetting")) {
+        MySetting = JSON.parse(localStorage.getItem("logoSetting"));
+      } else {
+        MySetting = {};
+      }
+      MySetting.theme = 2;
+      localStorage.setItem("logoSetting", JSON.stringify(MySetting));
+      SetGreenTheme();
+      themePreview.style.backgroundImage =
+        "url(assets/icons/" + MySetting.theme + ".jpg)";
+    }
+    if (e.target.classList.contains("orange")) {
+      MySetting = {};
+      if (localStorage.getItem("logoSetting")) {
+        MySetting = JSON.parse(localStorage.getItem("logoSetting"));
+      } else {
+        MySetting = {};
+      }
+      MySetting.theme = 4;
+      localStorage.setItem("logoSetting", JSON.stringify(MySetting));
+      SetOrangeTheme();
+      themePreview.style.backgroundImage =
+        "url(assets/icons/" + MySetting.theme + ".jpg)";
+    }
+  }
+  function SetDefaultTheme() {
+    document.documentElement.style.setProperty("--headerColor", "#222e9f");
+    document.documentElement.style.setProperty("--hoverColor", "#1b2586");
+    document.documentElement.style.setProperty("--logoContainer", "#1a237e");
+    document.documentElement.style.setProperty("--answerContainer", "#151f78");
+    document.documentElement.style.setProperty(
+      "--keyboardContainer",
+      "#101b8d"
+    );
+    document.documentElement.style.setProperty("--border", "#2196f3");
+    document.documentElement.style.setProperty("--buttons", "#1752a9");
+    document.documentElement.style.setProperty("--buttonOption", "#1e288a");
+    document.documentElement.style.setProperty("--popup", "#3f51b5e0");
+    document.documentElement.style.setProperty("--bgColor", "#3f51b5");
+  }
+  function SetBlackTheme() {
+    document.documentElement.style.setProperty("--headerColor", "#212121");
+    document.documentElement.style.setProperty("--hoverColor", "#424242");
+    document.documentElement.style.setProperty("--logoContainer", "#212121");
+    document.documentElement.style.setProperty("--answerContainer", "#1d1919");
+    document.documentElement.style.setProperty(
+      "--keyboardContainer",
+      "#212121"
+    );
+    document.documentElement.style.setProperty("--border", "#2196f3");
+    document.documentElement.style.setProperty("--buttons", "#212121");
+    document.documentElement.style.setProperty("--buttonOption", "#3e3d3d");
+    document.documentElement.style.setProperty("--popup", "#1d1919d9");
+    document.documentElement.style.setProperty("--bgColor", "#0b0b0b");
+  }
+  function SetGreenTheme() {
+    document.documentElement.style.setProperty("--headerColor", "#43a047");
+    document.documentElement.style.setProperty(
+      "--hoverColor",
+      "rgba(4,107,4,.767)"
+    );
+    document.documentElement.style.setProperty(
+      "--logoContainer",
+      "rgba(4,107,4,.767)"
+    );
+    document.documentElement.style.setProperty("--answerContainer", "#347b37");
+    document.documentElement.style.setProperty(
+      "--keyboardContainer",
+      "rgba(4,107,4,.767)"
+    );
+    document.documentElement.style.setProperty("--border", "#ffffff");
+    document.documentElement.style.setProperty(
+      "--buttons",
+      "rgba(4,107,4,.767)"
+    );
+    document.documentElement.style.setProperty("--buttonOption", "#3c8c3f");
+    document.documentElement.style.setProperty("--popup", "rgba(4,107,4,.767)");
+    document.documentElement.style.setProperty("--bgColor", "#3c8c3f");
+  }
+  function SetOrangeTheme() {
+    document.documentElement.style.setProperty("--headerColor", "#e65100");
+    document.documentElement.style.setProperty("--hoverColor", "#d26d06");
+    document.documentElement.style.setProperty("--logoContainer", "#e65100");
+    document.documentElement.style.setProperty("--answerContainer", "#e45d14");
+    document.documentElement.style.setProperty(
+      "--keyboardContainer",
+      "#e65100"
+    );
+    document.documentElement.style.setProperty("--border", "#ffffff");
+    document.documentElement.style.setProperty("--buttons", "#d85209");
+    document.documentElement.style.setProperty("--buttonOption", "#c54c0b");
+    document.documentElement.style.setProperty("--popup", "#d85209b5");
+    document.documentElement.style.setProperty("--bgColor", "#f57c00");
+    document.documentElement.style.setProperty("--SecondaryColor", "#fff");
+  }
+  function SetRedTheme() {
+    document.documentElement.style.setProperty("--headerColor", "#cc2e2e");
+    document.documentElement.style.setProperty("--hoverColor", "#941717");
+    document.documentElement.style.setProperty("--logoContainer", "#b71c1c");
+    document.documentElement.style.setProperty("--answerContainer", "#ad1717");
+    document.documentElement.style.setProperty(
+      "--keyboardContainer",
+      "#b71c1c"
+    );
+    document.documentElement.style.setProperty("--border", "#ffffff");
+    document.documentElement.style.setProperty("--buttons", "#b71c1c");
+    document.documentElement.style.setProperty("--buttonOption", "#921616");
+    document.documentElement.style.setProperty("--popup", "#b71c1c8a");
+    document.documentElement.style.setProperty("--bgColor", "#a71a1a");
+  }
+
   function DefaultSetting() {
     localStorage.removeItem("logoSetting");
     window.location.reload();
@@ -123,6 +308,16 @@ var UI = (function() {
       hideMenu();
     }
   }
+  function homeScreen(e) {
+    var appSetting = {};
+    if (localStorage.getItem("logoSetting")) {
+      appSetting = JSON.parse(localStorage.getItem("logoSetting"));
+      appSetting.homeScreen = e.target.checked;
+    } else {
+      appSetting.homeScreen = e.target.checked;
+    }
+    localStorage.setItem("logoSetting", JSON.stringify(appSetting));
+  }
   function StartTheGame() {
     HideElement(Welcome);
   }
@@ -134,12 +329,18 @@ var UI = (function() {
       keyboardWrapper.appendChild(div);
     }
   }
+  function clearAnswer() {
+    LoadData();
+    HideElement(losepopup);
+  }
   function KeypadPressed(e) {
     var AnswerSymbols = document.querySelectorAll(".symbols");
     if (e.target.parentElement.classList.contains("keypad")) {
       var parent = e.target.parentElement;
       for (var i = 0; i < AnswerSymbols.length; i++) {
         if (!AnswerSymbols[i].firstChild) {
+          e.target.classList.add("zoomIn", "animated");
+          e.target.style.animationDuration = "0.2s";
           AnswerSymbols[i].appendChild(e.target);
           parent.remove();
           break;
@@ -173,20 +374,23 @@ var UI = (function() {
       keyboardWrapper.innerHTML = null;
       answerWrapper.innerHTML = null;
       for (var i = 0; i < logos[Level].keyboard.length; i++) {
-        keyboardWrapper.innerHTML += "\n        <div class=\"keypad\"\"><span>" + (logos[Level].keyboard[i]) + "</span></div>";
+        keyboardWrapper.innerHTML +=
+          '\n        <div class="keypad""><span>' +
+          logos[Level].keyboard[i] +
+          "</span></div>";
       }
       for (var i$1 = 0; i$1 < logos[Level].numberWords; i$1++) {
-        answerWrapper.innerHTML += "\n        <div class=\"symbols\"\"></div>";
+        answerWrapper.innerHTML += '\n        <div class="symbols""></div>';
       }
       logoImage.src = logos[Level].logoImag;
       setSettings();
     } else {
-      console.log("Out Of Range");
+      ShowElement(DataNotFound, "flex");
     }
     updateLevel();
   }
   function ShowElement(element, property) {
-    if ( property === void 0 ) property = "block";
+    if (property === void 0) { property = "block"; }
 
     element.style.display = property;
   }
@@ -221,7 +425,7 @@ var UI = (function() {
       }
     }
     if (count === 0) {
-      console.log("Error");
+      ShowElement(losepopup, "flex");
     }
   }
   function FontSet(e) {
@@ -315,12 +519,14 @@ var UI = (function() {
   function menuOptions(e) {
     if (e.target.classList.contains("menu-home")) {
       HideElement(optionContainer);
+      HideElement(about);
       hideMenu();
     }
     if (e.target.classList.contains("menu-setting")) {
       ShowElement(optionContainer);
       HideElement(report);
       HideElement(themes);
+      HideElement(about);
       ShowElement(setting);
       hideMenu();
     }
@@ -328,12 +534,14 @@ var UI = (function() {
       ShowElement(optionContainer);
       ShowElement(report, "flex");
       HideElement(themes);
+      HideElement(about);
       HideElement(setting);
       hideMenu();
     }
     if (e.target.classList.contains("menu-themes")) {
       ShowElement(optionContainer);
       HideElement(report);
+      HideElement(about);
       HideElement(setting);
       ShowElement(themes);
       hideMenu();
@@ -343,6 +551,7 @@ var UI = (function() {
       HideElement(report);
       HideElement(setting);
       HideElement(themes);
+      ShowElement(about, "flex");
       hideMenu();
     }
   }
@@ -398,6 +607,7 @@ var UI = (function() {
   }
   function setSettings() {
     var Setting = {};
+    themePreview.style.backgroundImage = "url(assets/icons/1.jpg)";
     if (localStorage.getItem("logoSetting")) {
       Setting = JSON.parse(localStorage.getItem("logoSetting"));
       if (Setting.keyboardSize) {
@@ -421,29 +631,76 @@ var UI = (function() {
           FontValue.textContent = "Sans Serif";
         }
       }
+      if (Setting.theme) {
+        if (Setting.theme === 3) {
+          SetBlackTheme();
+          themePreview.style.backgroundImage =
+            "url(assets/icons/" + Setting.theme + ".jpg)";
+        }
+        if (Setting.theme === 1) {
+          SetDefaultTheme();
+          themePreview.style.backgroundImage =
+            "url(assets/icons/" + Setting.theme + ".jpg)";
+        }
+        if (Setting.theme === 2) {
+          SetGreenTheme();
+          themePreview.style.backgroundImage =
+            "url(assets/icons/" + Setting.theme + ".jpg)";
+        }
+        if (Setting.theme === 4) {
+          SetOrangeTheme();
+          themePreview.style.backgroundImage =
+            "url(assets/icons/" + Setting.theme + ".jpg)";
+        }
+        if (Setting.theme === 5) {
+          SetRedTheme();
+          themePreview.style.backgroundImage =
+            "url(assets/icons/" + Setting.theme + ".jpg)";
+        }
+      }
+
       if (Setting.fontSize) {
         SetFontSize(Setting.fontSize.value);
         SizeValue.textContent = Setting.fontSize.selector;
       }
+      if (Setting.homeScreen) {
+        homeChecked.checked = true;
+        document.querySelector(".splash").style.display = "none";
+        document.querySelector(".welcome").style.display = "none";
+      } else {
+        setTimeout(function () {
+          document.querySelector(".splash").style.display = "none";
+        }, 2000);
+      }
+    } else {
+      setTimeout(function () {
+        document.querySelector(".splash").style.display = "none";
+      }, 2000);
     }
   }
   function showWin() {
     winPopUp.style.display = "flex";
     LogoHint.src = logos[Level].hint;
-    winPopUp.classList.add("fadeIn", "animated");
-    LogoHint.classList.add("slideInLeft", "animated");
-    NextButton.classList.add("slideInLeft", "animated");
+    setTimeout(function () {
+      LogoHint.classList.add("jackInTheBox", "animated");
+      NextButton.classList.add("jackInTheBox", "animated");
+    }, 300);
   }
   function NextLevel() {
-    Level++;
-    if (Level === logos.length) {
-      Level = 0;
+    if (CheckAnswer()) {
+      Level++;
+      if (Level === logos.length) {
+        Level = 0;
+      }
+      localStorage.setItem("LogoLevel", Level);
+      LoadData();
+      setSettings();
+      HideElement(winPopUp);
+      updateLevel();
+      NextButton.focus = true;
+    } else {
+      console.log("Check Your Answer");
     }
-    localStorage.setItem("LogoLevel", Level);
-    LoadData();
-    setSettings();
-    HideElement(winPopUp);
-    updateLevel();
   }
   function updateLevel() {
     LevelLabel.textContent = "Level : " + (Level + 1);
@@ -451,12 +708,9 @@ var UI = (function() {
   return {
     loadEvent: loadEvent,
     setSettings: setSettings,
-    LoadData: LoadData
+    LoadData: LoadData,
   };
 })();
 UI.loadEvent();
 UI.setSettings();
 UI.LoadData();
-setTimeout(function () {
-  document.querySelector(".splash").style.display = "none";
-}, 2000);
