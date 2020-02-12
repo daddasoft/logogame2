@@ -9,7 +9,6 @@ var menuList = document.querySelector(".menu-list");
 var LevelLabel = document.querySelector(".home__header--level");
 var menu = document.querySelector(".menu");
 var losepopup = document.querySelector(".losepopup");
-var ClearAnswer = document.querySelector(".losepopup__clear");
 var CloseAnswer = document.querySelector(".losepopup__close");
 var FontValue = document.querySelector(".valueFont");
 var SizeValue = document.querySelector(".valueSize");

@@ -16,9 +16,6 @@ var UI = (function () {
     homeChecked.addEventListener("change", homeScreen);
     themeList.addEventListener("click", themeManager);
     setting.addEventListener("click", hidedetails);
-    ClearAnswer.addEventListener("click", clearAnswer);
-    CloseAnswer.addEventListener("click", closeLose);
-    DataNotFoundReset.addEventListener("click", reserTheApp);
   }
   function hidedetails() {
     if (!IsShowingFont) {
