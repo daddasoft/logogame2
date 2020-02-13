@@ -459,15 +459,15 @@ var UI = (function () {
       FontValue.textContent = e.target.textContent;
     }
     if (e.target.textContent === "Sans serif") {
-      document.documentElement.style.setProperty("--font", "sans-serif");
+      document.documentElement.style.setProperty("--font", "system-ui");
       if (localStorage.getItem("logoSetting")) {
         Setting = JSON.parse(localStorage.getItem("logoSetting"));
-        Setting.FontFamily = { id: 2, name: "sans-serif" };
+        Setting.FontFamily = { id: 2, name: "system-ui" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
         console.log(Setting);
       } else {
         Setting = {};
-        Setting.FontFamily = { id: 2, name: "sans-serif" };
+        Setting.FontFamily = { id: 2, name: "system-ui" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
         console.log(Setting);
       }
