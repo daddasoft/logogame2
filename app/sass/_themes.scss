@@ -17,24 +17,24 @@
       border: 3px solid var(--textColor);
       cursor: pointer;
       &.default {
-        background: red;
+        background: blue;
       }
-      &.light {
-        background: red;
+      &.orange{
+        background: orangered;
       }
       &.dark {
+        background: black;
+      }
+      &.red {
         background: red;
       }
-      &.sky {
-        background: red;
-      }
-      &.gradient {
-        background: red;
+      &.green {
+        background: green;
       }
     }
   }
   &__preview {
-    background: #000;
+    background: var(--bgColor);
     height: 100%;
   }
 }
