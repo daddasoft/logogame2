@@ -232,7 +232,7 @@ var UI = (function () {
       var parent = e.target.parentElement;
       for (var i = 0; i < AnswerSymbols.length; i++) {
         if (!AnswerSymbols[i].firstChild) {
-          e.target.classList.add("zoomIn", "animated");
+          e.target.classList.add("rotateInDownLeft", "animated");
           e.target.style.animationDuration = "0.2s";
           AnswerSymbols[i].appendChild(e.target);
           parent.remove();
