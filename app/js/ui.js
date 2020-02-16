@@ -240,7 +240,7 @@ var UI = (function () {
         }
       }
       if (CheckAnswer()) {
-        console.log("Yeah");
+        // console.log("Yeah");
         showWin();
       } else {
         IsAllSet();
@@ -295,7 +295,7 @@ var UI = (function () {
       HideElement(FontFamilyDrop);
       IsShowingFont = !IsShowingFont;
     }
-    console.log(e.target);
+    // console.log(e.target);
   }
   function CheckAnswer() {
     var place = document.querySelectorAll(".symbols");
@@ -331,12 +331,12 @@ var UI = (function () {
         Setting = JSON.parse(localStorage.getItem("logoSetting"));
         Setting.FontFamily = { id: 1, name: "'Roboto'" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       } else {
         Setting = {};
         Setting.FontFamily = { id: 1, name: "'Roboto'" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       }
       FontValue.textContent = e.target.textContent;
     }
@@ -346,12 +346,12 @@ var UI = (function () {
         Setting = JSON.parse(localStorage.getItem("logoSetting"));
         Setting.FontFamily = { id: 0, name: "'Lexend Deca'" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       } else {
         Setting = {};
         Setting.FontFamily = { id: 0, name: "'Lexend Deca'" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       }
       FontValue.textContent = e.target.textContent;
     }
@@ -361,12 +361,12 @@ var UI = (function () {
         Setting = JSON.parse(localStorage.getItem("logoSetting"));
         Setting.FontFamily = { id: 2, name: "system-ui" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       } else {
         Setting = {};
         Setting.FontFamily = { id: 2, name: "system-ui" };
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       }
       FontValue.textContent = e.target.textContent;
     }
@@ -459,12 +459,12 @@ var UI = (function () {
         Setting = JSON.parse(localStorage.getItem("logoSetting"));
         Setting.keyboardSize = Size;
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       } else {
         Setting = {};
         Setting.keyboardSize = Size;
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       }
     }
   }
@@ -479,12 +479,12 @@ var UI = (function () {
         Setting = JSON.parse(localStorage.getItem("logoSetting"));
         Setting.keyboardSize = Size;
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       } else {
         Setting = {};
         Setting.keyboardSize = Size;
         localStorage.setItem("logoSetting", JSON.stringify(Setting));
-        console.log(Setting);
+        // console.log(Setting);
       }
     }
   }
@@ -592,7 +592,7 @@ var UI = (function () {
       updateLevel();
       NextButton.focus = true;
     } else {
-      console.log("Check Your Answer");
+      // console.log("Check Your Answer");
     }
   }
   function updateLevel() {
