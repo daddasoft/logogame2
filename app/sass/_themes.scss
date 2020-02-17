@@ -19,7 +19,7 @@
       &.default {
         background: blue;
       }
-      &.orange{
+      &.orange {
         background: orangered;
       }
       &.dark {
@@ -36,5 +36,38 @@
   &__preview {
     background: var(--bgColor);
     height: 100%;
+    padding: 20px;
+    & div {
+      background: #000;
+      margin-bottom: 10px;
+      height: 40px;
+      border-radius: 8px;
+
+      &.circle {
+        width: 40px;
+        border-radius: 50%;
+        background: var(--linear);
+        margin: auto;
+        margin-bottom: 10px;
+      }
+      &.bar-1 {
+        background: var(--keyboardContainer);
+      }
+      &.bar-2 {
+        background: var(--headerColor);
+      }
+      &.bar-3 {
+        background: var(--hoverColor);
+      }
+      &.bar-4 {
+        background: var(--logoContainer);
+      }
+      &.bar-5 {
+        background: var(--answerContainer);
+      }
+      &.bar-6 {
+        background: var(--keyboardContainer);
+      }
+    }
   }
 }
