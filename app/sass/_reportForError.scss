@@ -26,9 +26,10 @@
 
   &__contact {
     width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
+    a {
+      font-size: 1.5rem;
+    }
 
     &--method {
       height: 60px;
@@ -38,27 +39,6 @@
       border: 2px solid var(--textColor);
       &:hover {
         background-color: var(--hoverColor);
-      }
-      &.facebook {
-        background-image: url("../assets/icons/facebook.svg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 20px;
-      }
-
-      &.email {
-        background-image: url("../assets/icons/facebook.svg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 20px;
-      }
-
-      &.whatsapp {
-        background-image: url("../assets/icons/whatsapp.svg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: 20px;
-        fill: #fff;
       }
     }
   }
